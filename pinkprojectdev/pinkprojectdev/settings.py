@@ -31,12 +31,30 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+
+    #Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+
+    #My Apps - Add new application folder names here
+
+    'liam_dev',
+    'james_dev',
+    'kang_dev',
+    'katharine_dev',
+    'shuyu_dev',
+
+    #Third Party Apps
+    'registration',
+    'crispy_forms',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +73,7 @@ ROOT_URLCONF = 'pinkprojectdev.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,12 +92,29 @@ WSGI_APPLICATION = 'pinkprojectdev.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'nlstudent',
+        'USER': 'nlstudent',
+        'PASSWORD': '2015pink',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
-}
+ }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 
 # Internationalization
@@ -100,3 +135,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "static_root")
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static", "our_static"),
+    # os.path.join(BASE_DIR, "static_in_env"),
+
+)
+
+
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "media_root")
+
+
+#Registration
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+REGISTRATION_REDIRECT_URL = '/'
+
