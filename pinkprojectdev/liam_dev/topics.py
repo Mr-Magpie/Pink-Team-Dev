@@ -4,6 +4,8 @@ __author__ = 'liamcreagh'
 
 print('Poop')
 
+print('File edited')
+
 from gensim import corpora, models, similarities
 dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
 corpus = corpora.MmCorpus('/tmp/deerwester.mm')
